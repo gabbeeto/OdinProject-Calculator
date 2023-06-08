@@ -2,8 +2,6 @@ let numberOne = [];
 let numberTwo = [];
 let mathStatus = 'nothing';
 
-let calculator =document.querySelector('#mainCalculator');
-calculator.addEventListener('click', operation);
 
 
 let changeTypeButton = document.querySelector('#changeNumberType');
@@ -32,10 +30,38 @@ let division = document.querySelector('#divisionSymbol');
 let divisionText = document.querySelector('#divisionSymbol p');
 
 
+let zero = document.querySelector('#zero');
+let zeroText = document.querySelector('#zero p');
+
+let one = document.querySelector('#one');
+let oneText = document.querySelector('#one p');
+
+let two = document.querySelector('#two');
+let twoText = document.querySelector('#two p');
+
+let three = document.querySelector('#three');
+let threeText = document.querySelector('#three p');
+
+let four = document.querySelector('#four');
+let fourText = document.querySelector('#four p');
+
+let five = document.querySelector('#five');
+let fiveText = document.querySelector('#five p');
+
+let six = document.querySelector('#six');
+let sixText = document.querySelector('#six p');
 
 
-let seven = document.querySelector('#seven') 
+let seven = document.querySelector('#seven');
 let sevenText = document.querySelector('#seven p');
+
+let eight = document.querySelector('#eight');
+let eightText = document.querySelector('#eight p');
+
+
+let nine = document.querySelector('#nine');
+let nineText = document.querySelector('#nine p');
+
 
 let bigText = document.querySelector('#bigText');
 let smallText = document.querySelector('#smallText');
@@ -50,6 +76,17 @@ let pointSymbolText = document.querySelector('#pointSymbol');
 
 
 
+let calculator =document.querySelector('#mainCalculator');
+calculator.addEventListener('click', operation);
+
+document.addEventListener('keydown', (e) =>
+	{
+console.log(e.key)
+
+	}
+
+)
+
 function operation(e){
 console.log(e.target);
 switch(e.target){
@@ -58,28 +95,13 @@ switch(e.target){
 		if(!numberTwo.join(``)){
 		changeNumberType(numberOne);
     numberOne = `${result}`.split('');
-		smallText.innerHTML = `${numberOne.join('')}`;
-		bigText.innerHTML = `${numberTwo.join('')}`;
+		refleshNumberOnPage();
 		}
 		else{
 		changeNumberType(numberTwo);
     numberTwo = `${result}`.split('');
 		smallText.innerHTML = `${numberOne.join('')}`;
-		if(mathStatus == 'nothing'){
-		bigText.innerHTML = `${numberTwo.join('')}`;
-		}
-		else if(mathStatus == 'addition'){
-		bigText.innerHTML = `+${numberTwo.join('')}`;
-		}
-		else if(mathStatus == 'substraction'){
-		bigText.innerHTML = `-${numberTwo.join('')}`;
-		}
-		else if(mathStatus == 'multiplication'){
-		bigText.innerHTML = `x${numberTwo.join('')}`;
-		}
-		else if(mathStatus == 'division'){
-		bigText.innerHTML = `/${numberTwo.join('')}`;
-		}
+		showDifferentSymbolsDependingOnMathStatus();
 		}
 		break;
 
@@ -90,8 +112,7 @@ switch(e.target){
 	case clearButtonText:
 		numberOne = [];
 		numberTwo = [];
-		smallText.innerHTML = `${numberOne.join('')}`;
-		bigText.innerHTML = `${numberTwo.join('')}`;
+		refleshNumberOnPage();
 		break;
 	
 
@@ -101,13 +122,11 @@ switch(e.target){
 	case deleteButtonText:
     if(!numberTwo.join(``)){
 		numberOne.pop();
-		smallText.innerHTML = `${numberOne.join('')}`;
-		bigText.innerHTML = `${numberTwo.join('')}`;
+		refleshNumberOnPage();
 		}
 		else{
 		numberTwo.pop();
-		smallText.innerHTML = `${numberOne.join('')}`;
-		bigText.innerHTML = `${numberTwo.join('')}`;
+		refleshNumberOnPage();
 		}
 		break;
 
@@ -116,13 +135,11 @@ switch(e.target){
 	case pointSymbolText:
     if(!numberTwo.join(``)){
 		numberOne.push('.');
-		smallText.innerHTML = `${numberOne.join('')}`;
-		bigText.innerHTML = `${numberTwo.join('')}`;
+    refleshNumberOnPage();
 		}
 		else{
 		numberTwo.push('.');
-		smallText.innerHTML = `${numberOne.join('')}`;
-		bigText.innerHTML = `${numberTwo.join('')}`;
+		refleshNumberOnPage();
 		}
 		break;
 
@@ -132,26 +149,22 @@ switch(e.target){
 	case equalitySymbolText:
 		if(numberTwo.join(``) && mathStatus == 'addition'){
 		addNumbers();
-		smallText.innerHTML = `${numberOne.join('')}`;
-		bigText.innerHTML = `${numberTwo.join('')}`;
+		refleshNumberOnPage();
 		mathStatus = 'nothing';
 		}
 		else if(numberTwo.join(``) && mathStatus == 'substraction'){
 		substractNumbers();
-		smallText.innerHTML = `${numberOne.join('')}`;
-		bigText.innerHTML = `${numberTwo.join('')}`;
+		refleshNumberOnPage();
 		mathStatus = 'nothing';
 		}
 		else if(numberTwo.join(``) && mathStatus == 'multiplication'){
 		multiplyNumbers();
-		smallText.innerHTML = `${numberOne.join('')}`;
-		bigText.innerHTML = `${numberTwo.join('')}`;
+		refleshNumberOnPage();
 		mathStatus = 'nothing';
 		}
 		else if(numberTwo.join(``) && mathStatus == 'division'){
 		divideNumbers();
-		smallText.innerHTML = `${numberOne.join('')}`;
-		bigText.innerHTML = `${numberTwo.join('')}`;
+		refleshNumberOnPage();
 		mathStatus = 'nothing';
 		}
 		break;
@@ -213,38 +226,145 @@ switch(e.target){
 
 
 
+	case zero:
+	case zeroText:
+		pushAndReflesh(0);
+		break;
+
+
+	case one:
+	case oneText:
+		pushAndReflesh(1);
+		break;
+
+	case two:
+	case twoText:
+		pushAndReflesh(2);
+		break;
+
+
+	case three:
+	case threeText:
+		pushAndReflesh(3);
+		break;
+
+
+	case four:
+	case fourText:
+		pushAndReflesh(4);
+		break;
+
+
+	case five:
+	case fiveText:
+		pushAndReflesh(5);
+		break;
+
+	case six:
+	case sixText:
+		pushAndReflesh(6);
+		break;
 
 	case seven:
 	case sevenText:
-		if(mathStatus == 'nothing'){
-		numberOne.push(7);
-		bigText.innerHTML = `${numberOne.join('')}`;
-		smallText.innerHTML = `${numberTwo.join('')}`;
-		}
-	  else if(mathStatus == 'addition'){
-		numberTwo.push(7);
-		bigText.innerHTML = `+${numberTwo.join('')}`;
-		smallText.innerHTML = `${numberOne.join('')}`;
-		}
-	  else if(mathStatus == 'substraction'){
-		numberTwo.push(7);
-		bigText.innerHTML = `-${numberTwo.join('')}`;
-		smallText.innerHTML = `${numberOne.join('')}`;
-		}
-	  else if(mathStatus == 'multiplication'){
-		numberTwo.push(7);
-		bigText.innerHTML = `x${numberTwo.join('')}`;
-		smallText.innerHTML = `${numberOne.join('')}`;
-		}
-		else if(mathStatus == 'division'){
-		numberTwo.push(7);
-		bigText.innerHTML = `%${numberTwo.join('')}`;
-		smallText.innerHTML = `${numberOne.join('')}`;
-		}
+		pushAndReflesh(7);
 		break;
 		
+
+	case eight:
+	case eightText:
+		pushAndReflesh(8);
+		break;
+
+
+	case nine:
+	case nineText:
+		pushAndReflesh(9);
+		break;
 	  	
 		}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function showDifferentSymbolsDependingOnMathStatus(){
+if(mathStatus == 'nothing'){
+showSymbolOnBigNumber();
+bigText.innerHTML = `${numberTwo.join('')}`;
+}
+else if(mathStatus == 'addition'){
+showSymbolOnBigNumber('+');
+}
+else if(mathStatus == 'substraction'){
+showSymbolOnBigNumber('-');
+}
+else if(mathStatus == 'multiplication'){
+showSymbolOnBigNumber('x');
+}
+else if(mathStatus == 'division'){
+showSymbolOnBigNumber('%');
+}
+
+}
+
+
+function showSymbolOnBigNumber(symbol = ''){
+bigText.innerHTML = `${symbol}${numberTwo.join('')}`;
+}
+
+
+
+
+
+function pushAndReflesh(numberToPush){
+
+if(mathStatus == 'nothing'){
+numberOne.push(numberToPush);
+refleshNumberOnPage();
+}
+else if(mathStatus == 'addition'){
+numberTwo.push(numberToPush);
+refleshNumberOnPage('+');
+}
+else if(mathStatus == 'substraction'){
+numberTwo.push(numberToPush);
+refleshNumberOnPage('-');
+}
+else if(mathStatus == 'multiplication'){
+numberTwo.push(numberToPush);
+refleshNumberOnPage('x');
+}
+else if(mathStatus == 'division'){
+numberTwo.push(numberToPush);
+refleshNumberOnPage('%');
+}
+
+}
+
+
+function refleshNumberOnPage(symbol = ''){
+if(!symbol){
+bigText.innerHTML = `${numberOne.join('')}`;
+}
+else{
+bigText.innerHTML = `${symbol}${numberTwo.join('')}`;
+smallText.innerHTML = `${numberOne.join('')}`;
+
+}
+
 }
 
 
