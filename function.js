@@ -379,7 +379,7 @@ refleshNumberOnPage();
 else{
 changeNumberType(numberTwo);
 numberTwo = `${result}`.split('');
-smallText.innerHTML = `${numberOne.join('')}`;
+smallText.innerHTML = `${numberOne.slice(0,16).join('')}`;
 showDifferentSymbolsDependingOnMathStatus();
 }
 
@@ -409,26 +409,26 @@ function changeMathStatusAndUpdateNumber(mathType){
 switch(mathType){
 	case '+':
   mathStatus = 'addition';
-	smallText.innerHTML = `${numberOne.join('')}`;
+	smallText.innerHTML = `${numberOne.slice(0,16).join('')}`;
 	bigText.innerHTML = '+';
 
 	break;
 
 	case '-':
   mathStatus = 'substraction';
-	smallText.innerHTML = `${numberOne.join('')}`;
+	smallText.innerHTML = `${numberOne.slice(0,16).join('')}`;
 	bigText.innerHTML = '-';
 	break;
 
 	case 'x':
   mathStatus = 'multiplication';
-	smallText.innerHTML = `${numberOne.join('')}`;
+	smallText.innerHTML = `${numberOne.slice(0,16).join('')}`;
 	bigText.innerHTML = 'x';
 	break;
 
 	case '%':
   mathStatus = 'division';
-	smallText.innerHTML = `${numberOne.join('')}`;
+	smallText.innerHTML = `${numberOne.slice(0,16).join('')}`;
 	bigText.innerHTML = '%';
 	break;
 }
@@ -492,25 +492,25 @@ switch(mathType){
 	case '+':
   bigText.innerHTML = `${mathType}`;
   addNumbers();
-  smallText.innerHTML = `${numberOne.join('')}`;
+  smallText.innerHTML = `${numberOne.slice(0,16).join('')}`;
 	break;
 
 	case '-':
   bigText.innerHTML = `${mathType}`;
   substractNumbers();
-  smallText.innerHTML = `${numberOne.join('')}`;
+  smallText.innerHTML = `${numberOne.slice(0,16).join('')}`;
 	break;
 
 	case 'x':
   bigText.innerHTML = `${mathType}`;
   multiplyNumbers();
-  smallText.innerHTML = `${numberOne.join('')}`;
+  smallText.innerHTML = `${numberOne.slice(0,16).join('')}`;
 	break;
 
 	case '%':
   bigText.innerHTML = `${mathType}`;
   divideNumbers();
-  smallText.innerHTML = `${numberOne.join('')}`;
+  smallText.innerHTML = `${numberOne.slice(0,16).join('')}`;
 	break;
 }
 }
@@ -526,7 +526,7 @@ switch(mathType){
 function showDifferentSymbolsDependingOnMathStatus(){
 if(mathStatus == 'nothing'){
 showSymbolOnBigNumber();
-bigText.innerHTML = `${numberTwo.join('')}`;
+bigText.innerHTML = `${numberTwo.slice(0,16).join('')}`;
 }
 else if(mathStatus == 'addition'){
 showSymbolOnBigNumber('+');
@@ -545,7 +545,7 @@ showSymbolOnBigNumber('%');
 
 
 function showSymbolOnBigNumber(symbol = ''){
-bigText.innerHTML = `${symbol}${numberTwo.join('')}`;
+bigText.innerHTML = `${symbol}${numberTwo.slice(0,16).join('')}`;
 }
 
 
@@ -580,11 +580,11 @@ refleshNumberOnPage('%');
 
 function refleshNumberOnPage(symbol = '', empty= false){
 if(!symbol){
-bigText.innerHTML = `${numberOne.join('')}`;
+bigText.innerHTML = `${numberOne.slice(0,16).join('')}`;
 }
 else{
-bigText.innerHTML = `${symbol}${numberTwo.join('')}`;
-smallText.innerHTML = `${numberOne.join('')}`;
+bigText.innerHTML = `${symbol}${numberTwo.slice(0,16).join('')}`;
+smallText.innerHTML = `${numberOne.slice(0,16).join('')}`;
 
 }
 if(empty){
