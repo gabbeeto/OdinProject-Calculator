@@ -27,6 +27,8 @@ background-color: #0699AD;
 display: grid;
 grid-template-rows: repeat(12,1fr) ;
 border-radius: 90px;
+border: 3px solid black;
+box-shadow: 5px 5px 50px 1px ;
 }
 
 #display{
